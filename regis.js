@@ -93,7 +93,7 @@ async function getOTP(token) {
   }
 }
 
-async function registerCapCut(email, token) {
+async function registerCapCut(email, passw, token) {
   const proxy = getRandomProxy();
   console.log(`🌍 Menggunakan proxy: ${proxy}`);
 
@@ -121,7 +121,7 @@ async function registerCapCut(email, token) {
   // isi password
   await new Promise(resolve => setTimeout(resolve, 1000));
   await page.waitForSelector("#root > div > div > div > div.sign_in-container > div.sign_in-activity-wrapper > div.lv-spin > div > div > div > div.lv_sign_in_panel-content > div.lv_sign_in_panel-form > div.lv_sign_in_panel-form-password > div > span > span > input");
-  await page.type("#root > div > div > div > div.sign_in-container > div.sign_in-activity-wrapper > div.lv-spin > div > div > div > div.lv_sign_in_panel-content > div.lv_sign_in_panel-form > div.lv_sign_in_panel-form-password > div > span > span > input", "password123");
+  await page.type("#root > div > div > div > div.sign_in-container > div.sign_in-activity-wrapper > div.lv-spin > div > div > div > div.lv_sign_in_panel-content > div.lv_sign_in_panel-form > div.lv_sign_in_panel-form-password > div > span > span > input", passw);
   console.log("✅ Berhasil isi password!");
 
   // Klik tombol "sign_up"
@@ -201,6 +201,6 @@ function getRandomUserAgent() {
 (async () => {
   const mailData = await getMailTMEmail();
   if (mailData) {
-    await registerCapCut(mailData.email, mailData.token);
+    await registerCapCut(mailData.email, mailData.password, mailData.token);
   }
 })();
